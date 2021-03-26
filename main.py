@@ -134,3 +134,10 @@ class TradingWithHMM(QCAlgorithm):
         dataframe = self.History(self.Symbol(ticker), timedelta(self.lookback), Resolution.Daily)
         closing_prices = dataframe["close"].to_list()
         return closing_prices
+    
+    def make_stationary(self, input_data):
+        in_data = np.asarray(input_data)
+        stationary_data, method = Stationary.auto_stationary(in_data, method=self.stat_method)
+        stationary_data = stationary_data + abs(min(stationary_data)) + in_data.mean()
+        stationary_result = Stationary.test_stationarity(stationary_data)
+        return stationary_data
