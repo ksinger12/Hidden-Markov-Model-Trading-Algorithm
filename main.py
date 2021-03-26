@@ -3,6 +3,7 @@ from collections import defaultdict
 import pandas as pd
 from Trade import *
 import numpy as np
+import Stationary
 
 class TradingWithHMM(QCAlgorithm):
     '''
